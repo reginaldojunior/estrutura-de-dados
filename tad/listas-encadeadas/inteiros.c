@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 struct cel {
-    int dado;
+    int conteudo;
     struct cel *prox;
 };
 typedef struct cel celula;
@@ -15,10 +15,30 @@ void insere(int x, celula *p)
     celula *nova;
     
     nova = (celula *) malloc (sizeof(celula));
-    nova->dado = x;
+    nova->conteudo = x;
     nova->prox = p->prox;
     
     p->prox = nova;
+}
+
+celula busca(int x, celula *lst)
+{
+    celula *p;
+    
+    p = lst->prox;
+    while (p != NULL && p->conteudo != x)
+        p = p->prox;
+
+    return *p;
+}
+
+void remove(celula *p)
+{
+    celula *lixo;
+
+    lixo = p->prox;
+    p->prox = lixo->prox;
+    free(lixo);
 }
 
 void imprime(celula *ini)
@@ -26,7 +46,7 @@ void imprime(celula *ini)
     celula *p;
 
     for (p = ini->prox; p != NULL; p = p->prox) {
-        printf ("%d\t", p->dado);
+        printf ("%d\t", p->conteudo);
     }
 
     printf ("\n");
@@ -35,13 +55,13 @@ void imprime(celula *ini)
 int main()
 {
     p = (celula *) malloc (sizeof(celula));
+    
     insere(1, p);
     insere(6, p);
     insere(9, p);
     insere(4, p);
     insere(8, p);
     insere(12, p);
-    imprime(p);
- 
+
     return EXIT_SUCCESS;
 }
