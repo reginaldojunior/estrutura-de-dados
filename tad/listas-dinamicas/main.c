@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ListaEstatica.h"
+#include "ListaDinamica.h"
 
 int main() {
     TipoLista L;
