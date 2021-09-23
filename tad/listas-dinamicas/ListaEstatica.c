@@ -28,7 +28,7 @@ int RemovePosicao(TipoLista *L, TipoApontador P)
 {
     TipoApontador aux;
 
-    if (P < 0 || P >= L->ultimo) {
+    if (P < 0 || P > L->ultimo) {
         printf("Posição Invalida. \n");
         return POSICAO_INVALIDA;
     }
