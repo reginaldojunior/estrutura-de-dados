@@ -11,23 +11,23 @@ int main() {
     CriaLista(&L);
     
     Item.chave = 5;
-    Item.nome[25] = "Debora";
     Insere(&L, Item);
 
     Item.chave = 1;
-    Item.nome[25] = "Reginaldo";
     Insere(&L, Item);
 
     Item.chave = 7;
-    Item.nome[25] = "Reginaldo";
     Insere(&L, Item);
 
     Item.chave = 8;
-    Item.nome[25] = "Reginaldo";
     Insere(&L, Item);
 
+    TipoChave chave = 5;
+    Item.chave = 6;
+    SubstituiItemPorChave(&L, chave, Item);
+
     ImprimeLista(&L);
-    ImprimeListaInvertida(&L);
+    // ImprimeListaInvertida(&L);
 
     return 0;
 }

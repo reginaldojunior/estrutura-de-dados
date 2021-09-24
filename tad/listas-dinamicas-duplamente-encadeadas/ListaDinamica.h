@@ -9,7 +9,6 @@
 typedef int TipoChave;
 typedef struct {
     TipoChave chave;
-    char nome[25];
 } TipoItem;
 
 typedef struct TipoNo *TipoApontador;
@@ -24,6 +23,7 @@ typedef struct {
 
 void CriaLista(TipoLista *L);
 int Insere(TipoLista *L, TipoItem I);
+int SubstituiItemPorChave(TipoLista *L, TipoChave C, TipoItem I);
 int Remove(TipoLista *L, TipoChave C);
 int RemovePosicao(TipoLista *L, TipoApontador P);
 TipoApontador Pesquisa(TipoLista *L, TipoChave C);

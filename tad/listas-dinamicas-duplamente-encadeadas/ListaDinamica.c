@@ -52,6 +52,40 @@ int Insere(TipoLista *L, TipoItem I)
     return SEM_ERRO;
 }
 
+int SubstituiItemPorChave(TipoLista *L, TipoChave C, TipoItem I)
+{
+    if (ListaVazia(L)) {
+        return NAO_ENCONTROU;
+    }
+
+    TipoApontador p, aux;
+    p = L->primeiro;
+    while (p != NULL) {
+        if (p->Item.chave == C) {
+            TipoItem old = p->Item;
+            p->Item = I;
+            Insere(L, old);
+        }
+
+        p = p->prox;
+    }
+
+    p = L->primeiro;
+    while (p != NULL) {
+        if (p->prox != NULL) {
+            if (p->Item.chave > p->prox->Item.chave) {
+                TipoItem aux = p->Item;
+                p->Item = p->prox->Item;
+                p->prox->Item = aux;
+            }
+        }
+
+        p = p->prox;
+    }
+
+    return SEM_ERRO;
+}
+
 int RemovePosicao(TipoLista *L, TipoApontador P)
 {
     if (P == NULL) {
