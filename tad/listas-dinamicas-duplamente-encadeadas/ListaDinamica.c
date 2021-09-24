@@ -59,15 +59,22 @@ int SubstituiItemPorChave(TipoLista *L, TipoChave C, TipoItem I)
     }
 
     TipoApontador p, aux;
+    int encontrou = 0;
     p = L->primeiro;
     while (p != NULL) {
         if (p->Item.chave == C) {
             TipoItem old = p->Item;
             p->Item = I;
             Insere(L, old);
+            encontrou = 1;
         }
 
         p = p->prox;
+    }
+
+    if (encontrou == 0) {
+        printf("Posição Invalida. \n");
+        return POSICAO_INVALIDA;
     }
 
     p = L->primeiro;

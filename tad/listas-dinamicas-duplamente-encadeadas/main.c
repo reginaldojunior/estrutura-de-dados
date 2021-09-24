@@ -22,7 +22,7 @@ int main() {
     Item.chave = 8;
     Insere(&L, Item);
 
-    TipoChave chave = 5;
+    TipoChave chave = 987;
     Item.chave = 6;
     SubstituiItemPorChave(&L, chave, Item);
 
