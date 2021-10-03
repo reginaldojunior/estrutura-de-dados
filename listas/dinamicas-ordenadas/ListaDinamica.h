@@ -24,6 +24,7 @@ typedef struct {
 
 void CriaLista(TipoLista *L);
 int Insere(TipoLista *L, TipoItem I);
+int OrdenaPorSelecao(TipoLista *L);
 int Remove(TipoLista *L, TipoChave C);
 int RemovePosicao(TipoLista *L, TipoApontador P);
 TipoApontador Pesquisa(TipoLista *L, TipoChave C);

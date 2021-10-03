@@ -27,33 +27,35 @@ int main() {
     Insere(&L, Item);
 
     ImprimeLista(&L);
-
-    Remove(&L, 5);
-
+    OrdenaPorSelecao(&L);
     ImprimeLista(&L);
 
-    Remove(&L, 5);
+    // Remove(&L, 5);
 
-    Item.chave = 1;
-    Item.nome[25] = "Reginaldo";
-    Insere(&L, Item);
+    // ImprimeLista(&L);
 
-    Item.chave = 6;
-    Item.nome[25] = "Reginaldo";
-    Insere(&L, Item);
+    // Remove(&L, 5);
 
-    Item.chave = 97;
-    Item.nome[25] = "Reginaldo";
-    Insere(&L, Item);
+    // Item.chave = 1;
+    // Item.nome[25] = "Reginaldo";
+    // Insere(&L, Item);
 
-    Item.chave = 56;
-    Item.nome[25] = "Reginaldo";
-    Insere(&L, Item);
+    // Item.chave = 6;
+    // Item.nome[25] = "Reginaldo";
+    // Insere(&L, Item);
 
-    ImprimeLista(&L);
-    printf("Achou? %d \n", Pesquisa(&L, 3));
-    printf("Achou? %d \n", Pesquisa(&L, 7));
-    printf("Achou? %d \n", Pesquisa(&L, 1));
+    // Item.chave = 97;
+    // Item.nome[25] = "Reginaldo";
+    // Insere(&L, Item);
+
+    // Item.chave = 56;
+    // Item.nome[25] = "Reginaldo";
+    // Insere(&L, Item);
+
+    // ImprimeLista(&L);
+    // printf("Achou? %d \n", Pesquisa(&L, 3));
+    // printf("Achou? %d \n", Pesquisa(&L, 7));
+    // printf("Achou? %d \n", Pesquisa(&L, 1));
 
     return 0;
 }

@@ -25,6 +25,7 @@ void CriaLista(TipoLista *L);
 int Insere(TipoLista *L, TipoItem I);
 int Remove(TipoLista *L, TipoChave C);
 int RemovePosicao(TipoLista *L, TipoApontador P);
+int RemoveTodasAsChaves(TipoLista *L, TipoChave C);
 TipoApontador Pesquisa(TipoLista *L, TipoChave C);
 
 char ListaVazia(TipoLista *L);

@@ -14,11 +14,15 @@ int main() {
     Item.nome[25] = "Debora";
     Insere(&L, Item);
 
-    Item.chave = 1;
+    Item.chave = 8;
     Item.nome[25] = "Reginaldo";
     Insere(&L, Item);
 
     Item.chave = 7;
+    Item.nome[25] = "Reginaldo";
+    Insere(&L, Item);
+
+    Item.chave = 65;
     Item.nome[25] = "Reginaldo";
     Insere(&L, Item);
 
@@ -28,16 +32,9 @@ int main() {
 
     ImprimeLista(&L);
 
-    Remove(&L, 5);
+    RemoveTodasAsChaves(&L, 8);
 
     ImprimeLista(&L);
-
-    Remove(&L, 5);
-
-    ImprimeLista(&L);
-    printf("Achou? %d \n", Pesquisa(&L, 3));
-    printf("Achou? %d \n", Pesquisa(&L, 7));
-    printf("Achou? %d \n", Pesquisa(&L, 1));
 
     return 0;
 }

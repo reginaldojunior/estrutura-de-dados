@@ -23,27 +23,34 @@ int Insere(TipoLista *L, TipoItem I)
     }
 
     p->Item = I;
+    p->prox = NULL;
 
     if (ListaVazia(L)) {
         L->primeiro = p;
         L->ultimo = p;
+    } else {
+        L->ultimo->prox = p;
+        L->ultimo = p;
+    }
+}
 
-        p->prox = NULL;
-    } else if (L->primeiro->Item.chave > I.chave) { // primeiro posicao
-        p->prox = L->primeiro;
-        L->primeiro = p;
-    } else { // todos os demais
-        TipoApontador aux;
-        aux = L->primeiro;
-        while (aux->prox != NULL && aux->prox->Item.chave < I.chave) {
-            aux = aux->prox;
+int OrdenaPorSelecao(TipoLista *L)
+{
+    TipoApontador p;
+    p = L->primeiro;
+
+    for (TipoApontador i = L->primeiro; i->prox != NULL; i = i->prox) {
+        TipoApontador menor = i;
+        for (TipoApontador j = i->prox; j != NULL; j = j->prox) {
+            if (j->Item.chave < menor->Item.chave) {
+                menor = j;
+            }
         }
 
-        p->prox = aux->prox;
-        aux->prox = p;
+        int aux = i->Item.chave;
+        i->Item.chave = menor->Item.chave;
+        menor->Item.chave = aux;
     }
-
-    return SEM_ERRO;
 }
 
 int RemovePosicao(TipoLista *L, TipoApontador P)

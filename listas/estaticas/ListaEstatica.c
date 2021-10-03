@@ -19,6 +19,20 @@ int Insere(TipoLista *L, TipoItem I)
     L->itens[L->ultimo] = I;
 }
 
+int RemoveTodasAsChaves(TipoLista *L, TipoChave C)
+{
+    for (int i = 0; i < L->ultimo; i++) {
+        TipoApontador P = Pesquisa(L, C);
+        TipoApontador aux;
+
+        for (aux = P; aux < L->ultimo; aux++) {
+            L->itens[aux] = L->itens[aux+1];
+        }
+
+        L->ultimo--;
+    }
+}
+
 int Remove(TipoLista *L, TipoChave C)
 {
     RemovePosicao(L, Pesquisa(L, C));

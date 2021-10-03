@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "limits": "c",
-        "listaestatica.h": "c"
+        "listaestatica.h": "c",
+        "typeinfo": "c"
     }
 }

@@ -9,25 +9,27 @@ int main() {
     
     CriaPilha(&P);
     
-    Item.chave = 5;
-    Insere(&P, Item);
+    // Item.chave = 5;
+    // Insere(&P, Item);
 
-    Item.chave = 6;
-    Insere(&P, Item);
+    // Item.chave = 6;
+    // Insere(&P, Item);
 
-    Item.chave = 7;
-    Insere(&P, Item);
+    // Item.chave = 7;
+    // Insere(&P, Item);
 
-    ImprimePilha(&P);
+    // ImprimePilha(&P);
 
-    printf("TopoPilha: %d \n", TopoPilha(&P));
+    // printf("TopoPilha: %d \n", TopoPilha(&P));
 
-    Remove(&P);
+    // Remove(&P);
 
-    ImprimePilha(&P);
-    Remove(&P);
-    Remove(&P);
-    ImprimePilha(&P);
+    // ImprimePilha(&P);
+    // Remove(&P);
+    // Remove(&P);
+    // ImprimePilha(&P);
+
+    BalanceamentoParenteses(&P);
 
     return 0;
 }
