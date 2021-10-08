@@ -1,43 +1,42 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-#include "ListaDinamica.h"
+#include "PilhaDinamica.h"
 
 int main() {
-    TipoLista L;
-    TipoItem Item;
-    TipoApontador P;
-    
-    CriaLista(&L);
-    
-    Item.chave = 5;
-    Item.nome[25] = "Debora";
-    Insere(&L, Item);
+	TipoPilha P;
+	TipoItem item;
 
-    Item.chave = 1;
-    Item.nome[25] = "Reginaldo";
-    Insere(&L, Item);
+	CriaPilha(&P);
+	//printf("Ponto A\n");
 
-    Item.chave = 7;
-    Item.nome[25] = "Reginaldo";
-    Insere(&L, Item);
+	item.chave = 5;
+	InserePilha(&P, item);
 
-    Item.chave = 8;
-    Item.nome[25] = "Reginaldo";
-    Insere(&L, Item);
+	item.chave = 1;
+	InserePilha(&P, item);
 
-    ImprimeLista(&L);
+	item.chave = 3;
+	InserePilha(&P, item);
 
-    Remove(&L, 5);
+	item.chave = 0;
+	InserePilha(&P, item);
 
-    ImprimeLista(&L);
+	item.chave = 25;
+	InserePilha(&P, item);
 
-    Remove(&L, 5);
+	item.chave = -3;
+	InserePilha(&P, item);
 
-    ImprimeLista(&L);
-    printf("Achou? %d \n", Pesquisa(&L, 3));
-    printf("Achou? %d \n", Pesquisa(&L, 7));
-    printf("Achou? %d \n", Pesquisa(&L, 1));
+	ImprimePilha(&P);
+	
+	item = TopoPilha(&P);
+	printf("Topo = %d\n", item.chave);
+	
+	RemovePilha(&P);
+	RemovePilha(&P);
+	RemovePilha(&P);
+	ImprimePilha(&P);
 
-    return 0;
+	while(!PilhaVazia(&P)) {
+		RemovePilha(&P);
+	}
 }

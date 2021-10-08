@@ -1,12 +1,11 @@
 CC = gcc
-CFGLAGS = -Wall
-programa = lista
-
-lista: ListaDinamica.c main.c
-	$(CC) -o $(programa) ListaDinamica.c main.c
-
-executa: lista
-	./$(programa)
-
+CFLAGS = -Wall
+	
+main: PilhaDinamica.c main.c
+	$(CC) -o main PilhaDinamica.c main.c
+	
 clean:
-	rm $(programa)
+	rm main *.o
+
+executa: main
+	./main
