@@ -7,8 +7,7 @@ int main() {
     int isQueue = 0; // tipo fila
     int isStack = 0; // tipo pilha
 	char C;
-    
-    printf("\t Digite o valor de N entre 1 à 100: ");
+
 	scanf("%d", &N);
 
     if (N < 1 || N > 100) {
@@ -23,16 +22,14 @@ int main() {
         CriaPilha(&P);
         CriaFila(&F);
 
-        printf("\t Digite o valor de K entre 2 à 100: ");
 		scanf("%d", &K);
 
         if (K < 2 || K > 100) {
-            printf("impossivel\n");
+            printf("impossivel 1\n");
             return 0;
         }
 		
 		for (int j = 0; j < K; j++) { // indica os valores do caso de teste entre 2 a 100
-            printf("\nDigite os pares C / I: ");
 			scanf(" %c %d", &C, &I);
 
             if (C == 'i') {
@@ -61,13 +58,13 @@ int main() {
 		}
 
         if (isStack == 1 && isQueue == 1) {
-            printf("\n\timpossivel\n");
+            printf("impossivel");
         } else if (isStack == 1) {
-            printf("\n\tpilha\n");
+            printf("pilha");
         } else if (isQueue == 1) {
-            printf("\n\tfila\n");
-        } else if (isStack == -1 && isQueue == -1) {
-            printf("\n\tindefinido\n");
+            printf("fila");
+        } else {
+            printf("indefinido");
         }
 
         printf("\n");
