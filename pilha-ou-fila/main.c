@@ -53,10 +53,8 @@ int main() {
                 } else {
                     if (pilhaRemovido.chave == I) {
                         isStack = 1;
-                        printf("pilharemovido: %d \n", pilhaRemovido.chave);
                     } else if (filaRemovido.chave == I) {
                         isQueue = 1;
-                        printf("filaremovido: %d \n", filaRemovido.chave);
                     }
                 }
             }
