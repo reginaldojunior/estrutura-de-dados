@@ -25,7 +25,8 @@ typedef struct {
 
 void CriaPilha(TipoPilha *P);
 int InserePilha(TipoPilha *P, TipoItemPilha I);
-void RemovePilha(TipoPilha *P);
+TipoItemPilha RemovePilha(TipoPilha *P);
+TipoItemPilha UltimoPilha(TipoPilha *P);
 TipoItemPilha TopoPilha(TipoPilha *P);
 
 char PilhaVazia(TipoPilha *P);

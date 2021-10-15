@@ -4,7 +4,6 @@
 
 void CriaPilha(TipoPilha *P) {
 	(*P).primeiro = NULL;
-	printf("Eh nois!\n");
 }
 
 int InserePilha(TipoPilha *P, TipoItemPilha I) {
@@ -31,25 +30,25 @@ int InserePilha(TipoPilha *P, TipoItemPilha I) {
 }
 
 
-void RemovePilha(TipoPilha *P) {
-	
+TipoItemPilha RemovePilha(TipoPilha *P) {
+	TipoItemPilha itemEmpty;
 	if (PilhaVazia(P)) {
 		printf("Deu nao\n");
-		return;
+		return itemEmpty;
 	}
 
 	// unico elemento
 	if (P->primeiro->prox == NULL) {
 		free(P->primeiro);
 		CriaPilha(P);
-		return;
+		return itemEmpty;
 	}
 
 	// remove do inicio
 	TipoApontadorPilha p = P->primeiro;
 	P->primeiro = P->primeiro->prox;
-	free(p);
 
+	return p->item;
 }
 
 TipoItemPilha TopoPilha(TipoPilha *P) {
@@ -69,7 +68,7 @@ char PilhaVazia(TipoPilha *P) {
 char PilhaCheia(TipoPilha *P);
 
 void ImprimePilha(TipoPilha *L)  {
-        TipoApontadorPilha P = L->primeiro;
+    TipoApontadorPilha P = L->primeiro;
 
 	int i = 0;
 	while(P != NULL) {
@@ -80,4 +79,18 @@ void ImprimePilha(TipoPilha *L)  {
 		P = P->prox;
 		i++;
 	}
+}
+
+TipoItemPilha UltimoPilha(TipoPilha *P) {
+	if (!PilhaVazia(P)) {
+		return P->primeiro->item;
+	}
+
+    TipoApontadorPilha ApontadorPilha = P->primeiro;
+
+	while(ApontadorPilha != NULL) {
+		ApontadorPilha = ApontadorPilha->prox;
+	}
+
+	return ApontadorPilha->item;
 }

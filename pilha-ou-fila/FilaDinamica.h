@@ -26,7 +26,7 @@ typedef struct {
 
 void CriaFila(TipoFila *F);
 int enfileira(TipoFila *F, TipoItemFila I);
-void desenfileira(TipoFila *F);
+TipoItemFila desenfileira(TipoFila *F);
 TipoItemFila frente(TipoFila *F);
 
 char FilaVazia(TipoFila *F);

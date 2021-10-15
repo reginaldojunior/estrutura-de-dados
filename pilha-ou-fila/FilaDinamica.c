@@ -5,8 +5,6 @@
 void CriaFila(TipoFila *F) {
 	(*F).primeiro = NULL;
     (*F).ultimo = NULL;
-
-	printf("Eh nois!\n");
 }
 
 int enfileira(TipoFila *F, TipoItemFila I) {
@@ -35,25 +33,25 @@ int enfileira(TipoFila *F, TipoItemFila I) {
 }
 
 
-void desenfileira(TipoFila *F) {
-	
+TipoItemFila desenfileira(TipoFila *F) {
+	TipoItemFila itemEmpty;
 	if (FilaVazia(F)) {
 		printf("Deu nao\n");
-		return;
+		return itemEmpty;
 	}
 
 	// unico elemento
 	if (F->primeiro->prox == NULL) {
 		free(F->primeiro);
 		CriaFila(F);
-		return;
+		return itemEmpty;
 	}
 
 	// remove do inicio
 	TipoApontadorFila p = F->primeiro;
 	F->primeiro = F->primeiro->prox;
-	free(p);
 
+	return p->item;
 }
 
 TipoItemFila frente(TipoFila *F) {
