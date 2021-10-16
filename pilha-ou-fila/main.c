@@ -2,10 +2,15 @@
 #include "PilhaDinamica.h"
 #include "FilaDinamica.h"
 
+#define FILA 1
+#define PILHA 2
+#define IMPOSSIVEL 3
+#define INDEFINIDO 4
+
 int main() {
 	int N, K, I;
-    int isQueue = 0; // tipo fila
-    int isStack = 0; // tipo pilha
+    int tipoEstrutura = 0; // tipo fila
+    int countFila, countPilha, countIndefinido, countImpossivel;
 	char C;
 
 	scanf("%d", &N);
@@ -41,35 +46,46 @@ int main() {
                 InserePilha(&P, Ip);
                 enfileira(&F, If);
             } else if (C == 'r') {
-                TipoItemPilha pilhaRemovido = RemovePilha(&P);
-                TipoItemFila filaRemovido = desenfileira(&F);
+                TipoItemPilha pilhaRemovido = TopoPilha(&P);
+                TipoItemFila filaRemovido = frente(&F);
 
-                if (pilhaRemovido.chave == I && filaRemovido.chave == 1) {
-                    isQueue = -1;
-                    isStack = -1;
+                if (filaRemovido.chave == I) {
+                    desenfileira(&F);
+
+                    if (pilhaRemovido.chave == I) {
+                        RemovePilha(&P);
+                        tipoEstrutura = INDEFINIDO;
+                        countIndefinido++;
+                    } else {
+                        tipoEstrutura = FILA;
+                        countFila++;
+                    }
                 } else {
                     if (pilhaRemovido.chave == I) {
-                        isStack = 1;
-                    } else if (filaRemovido.chave == I) {
-                        isQueue = 1;
+                        RemovePilha(&P);
+                        tipoEstrutura = PILHA;
+                        countPilha++;
+                    } else {
+                        tipoEstrutura = IMPOSSIVEL;
+                        countImpossivel++;
                     }
                 }
             }
 		}
 
-        if (isStack == 1 && isQueue == 1) {
+        printf("\t impossivel %d / pilha %d / fila %d / indefinido %d \n", countImpossivel, countPilha, countFila, countIndefinido);
+        if (tipoEstrutura == IMPOSSIVEL) {
             printf("impossivel");
-        } else if (isStack == 1) {
+        } else if (tipoEstrutura == PILHA) {
             printf("pilha");
-        } else if (isQueue == 1) {
+        } else if (tipoEstrutura == FILA) {
             printf("fila");
         } else {
             printf("indefinido");
         }
 
         printf("\n");
-        isQueue = 0;
-        isStack = 0;
+        tipoEstrutura = INDEFINIDO;
 	}
 
     return 0;

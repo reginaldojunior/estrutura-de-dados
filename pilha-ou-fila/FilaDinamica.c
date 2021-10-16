@@ -33,25 +33,24 @@ int enfileira(TipoFila *F, TipoItemFila I) {
 }
 
 
-TipoItemFila desenfileira(TipoFila *F) {
+void desenfileira(TipoFila *F) {
 	TipoItemFila itemEmpty;
 	if (FilaVazia(F)) {
 		printf("Deu nao\n");
-		return itemEmpty;
+		return;
 	}
 
 	// unico elemento
 	if (F->primeiro->prox == NULL) {
 		free(F->primeiro);
 		CriaFila(F);
-		return itemEmpty;
+		return;
 	}
 
 	// remove do inicio
 	TipoApontadorFila p = F->primeiro;
 	F->primeiro = F->primeiro->prox;
-
-	return p->item;
+	free(p);
 }
 
 TipoItemFila frente(TipoFila *F) {
