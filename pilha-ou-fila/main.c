@@ -41,16 +41,23 @@ int main() {
                 InserePilha(&P, Ip);
                 enfileira(&F, If);
             } else if (C == 'r') {
-                TipoItemPilha pilhaRemovido = RemovePilha(&P);
-                TipoItemFila filaRemovido = desenfileira(&F);
+                TipoItemPilha topoPilha = TopoPilha(&P);
+                TipoItemFila frentePilha = frente(&F);
 
-                if (pilhaRemovido.chave == I && filaRemovido.chave == 1) {
+                if (topoPilha.chave != I && frentePilha.chave != I) {
+                    // printf("topoPilha %d, frentePilha %d valor esperado %d\n", topoPilha.chave, frentePilha.chave, I);
+                }
+
+                RemovePilha(&P);
+                desenfileira(&F);
+
+                if (topoPilha.chave == I && frentePilha.chave == 1) {
                     isQueue = -1;
                     isStack = -1;
                 } else {
-                    if (pilhaRemovido.chave == I) {
+                    if (topoPilha.chave == I) {
                         isStack = 1;
-                    } else if (filaRemovido.chave == I) {
+                    } else if (frentePilha.chave == I) {
                         isQueue = 1;
                     }
                 }

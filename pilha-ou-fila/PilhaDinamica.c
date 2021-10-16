@@ -30,25 +30,24 @@ int InserePilha(TipoPilha *P, TipoItemPilha I) {
 }
 
 
-TipoItemPilha RemovePilha(TipoPilha *P) {
-	TipoItemPilha itemEmpty;
+void RemovePilha(TipoPilha *P) {
+	
 	if (PilhaVazia(P)) {
 		printf("Deu nao\n");
-		return itemEmpty;
+		return;
 	}
 
 	// unico elemento
 	if (P->primeiro->prox == NULL) {
 		free(P->primeiro);
 		CriaPilha(P);
-		return itemEmpty;
+		return;
 	}
 
 	// remove do inicio
 	TipoApontadorPilha p = P->primeiro;
 	P->primeiro = P->primeiro->prox;
-
-	return p->item;
+	free(p);
 }
 
 TipoItemPilha TopoPilha(TipoPilha *P) {
