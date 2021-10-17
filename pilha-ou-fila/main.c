@@ -6,6 +6,9 @@ int main() {
 	int N, K, I;
     int isQueue = 0; // tipo fila
     int isStack = 0; // tipo pilha
+    int isNotDefinedMoreOneTime = 0;
+    int itemNotFoundStack = 0;
+    int itemNotFoundQueue = 0;
 	char C;
 
 	scanf("%d", &N);
@@ -40,29 +43,62 @@ int main() {
 
                 InserePilha(&P, Ip);
                 enfileira(&F, If);
+                // printf("inserindo \n");
+                // ImprimePilha(&P);
+                // printf("\n\n");
             } else if (C == 'r') {
-                TipoItemPilha pilhaRemovido = RemovePilha(&P);
-                TipoItemFila filaRemovido = desenfileira(&F);
+                // printf("removendo \n");
+                // ImprimePilha(&P);
+                // printf("\n\n");
+                TipoItemPilha pilhaRemovido = TopoPilha(&P);
+                RemovePilha(&P);
+                TipoItemFila filaRemovido = frente(&F);
+                desenfileira(&F);
+                // printf("fila: %d, pilha: %d, esperado: %d \n", filaRemovido.chave, pilhaRemovido.chave, I);
+                
+                // if (isStack == isQueue && isQueue > 0 && isStack > 0) {
+                //     isNotDefinedMoreOneTime++;
+                // }
+                
+                if (pilhaRemovido.chave == I) {
+                    isStack++;
+                } 
+                
+                if (filaRemovido.chave == I) {
+                    isQueue++;
+                }
 
-                if (pilhaRemovido.chave == I && filaRemovido.chave == 1) {
-                    isQueue = -1;
-                    isStack = -1;
-                } else {
-                    if (pilhaRemovido.chave == I) {
-                        isStack = 1;
-                    } else if (filaRemovido.chave == I) {
-                        isQueue = 1;
-                    }
+                if (isStack >= 1 && pilhaRemovido.chave != I) { // invalida pilha
+                    itemNotFoundStack = 1;
+                }
+
+                if (isQueue >= 1 && filaRemovido.chave != I) { // invalida fila
+                    itemNotFoundQueue = 1;
+                } else if (isQueue >= 1 && filaRemovido.chave != I) { // invalida fila
+                    isQueue = 0;
+                }
+
+                if (filaRemovido.chave == I && pilhaRemovido.chave == I) {
+                    isNotDefinedMoreOneTime++;
                 }
             }
 		}
-
-        if (isStack == 1 && isQueue == 1) {
-            printf("impossivel");
-        } else if (isStack == 1) {
-            printf("pilha");
-        } else if (isQueue == 1) {
-            printf("fila");
+        
+        // printf("isStack %d isQueue %d itemNotFoundQueue %d itemNotFoundStack %d isNotDefinedMoreOneTime %d\n", isStack, isQueue, itemNotFoundQueue, itemNotFoundStack, isNotDefinedMoreOneTime);
+        if (isStack > isQueue) {
+            if (itemNotFoundStack == 1) {
+                printf("impossivel");   
+            } else {
+                printf("pilha");
+            }
+        } else if (isQueue > isStack) {
+            if (itemNotFoundQueue == 1) {
+                printf("impossivel");   
+            } else {
+                printf("fila");
+            }
+        } else if (isQueue == isStack && (itemNotFoundQueue > 0 || itemNotFoundStack > 0)) {
+            printf("impossivel"); 
         } else {
             printf("indefinido");
         }
@@ -70,6 +106,8 @@ int main() {
         printf("\n");
         isQueue = 0;
         isStack = 0;
+        itemNotFoundStack = 0;
+        itemNotFoundQueue = 0;
 	}
 
     return 0;
