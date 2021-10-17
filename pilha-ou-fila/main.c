@@ -43,22 +43,11 @@ int main() {
 
                 InserePilha(&P, Ip);
                 enfileira(&F, If);
-                // printf("inserindo \n");
-                // ImprimePilha(&P);
-                // printf("\n\n");
             } else if (C == 'r') {
-                // printf("removendo \n");
-                // ImprimePilha(&P);
-                // printf("\n\n");
                 TipoItemPilha pilhaRemovido = TopoPilha(&P);
                 RemovePilha(&P);
                 TipoItemFila filaRemovido = frente(&F);
                 desenfileira(&F);
-                // printf("fila: %d, pilha: %d, esperado: %d \n", filaRemovido.chave, pilhaRemovido.chave, I);
-                
-                // if (isStack == isQueue && isQueue > 0 && isStack > 0) {
-                //     isNotDefinedMoreOneTime++;
-                // }
                 
                 if (pilhaRemovido.chave == I) {
                     isStack++;
