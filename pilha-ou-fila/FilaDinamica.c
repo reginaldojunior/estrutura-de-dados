@@ -32,26 +32,23 @@ int enfileira(TipoFila *F, TipoItemFila I) {
 
 }
 
-
-TipoItemFila desenfileira(TipoFila *F) {
-	TipoItemFila itemEmpty;
+void desenfileira(TipoFila *F) {
 	if (FilaVazia(F)) {
 		printf("Deu nao\n");
-		return itemEmpty;
+		return;
 	}
 
 	// unico elemento
 	if (F->primeiro->prox == NULL) {
 		free(F->primeiro);
 		CriaFila(F);
-		return itemEmpty;
+		return;
 	}
 
 	// remove do inicio
 	TipoApontadorFila p = F->primeiro;
 	F->primeiro = F->primeiro->prox;
-
-	return p->item;
+	free(p);
 }
 
 TipoItemFila frente(TipoFila *F) {
@@ -76,9 +73,9 @@ void ImprimeFila(TipoFila *L)  {
 	int i = 0;
 	while(F != NULL) {
 		if (F->prox != NULL)
-			printf("%d: chave=%d, Froximo=%d\n", i, F->item.chave, F->prox->item.chave);
+			printf("%d: chave=%d, Nome=%c, Froximo=%d\n", i, F->item.chave, F->item.nome, F->prox->item.chave);
 		else
-			printf("%d: chave=%d, Froximo=NULO\n", i, F->item.chave);
+			printf("%d: chave=%d, Nome=%c Froximo=NULO\n", i, F->item.chave, F->item.nome);
 		F = F->prox;
 		i++;
 	}

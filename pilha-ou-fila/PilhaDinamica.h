@@ -9,7 +9,7 @@
 typedef int TipoChave;
 typedef struct {
 	TipoChave chave;
-	//char nome[50];
+	char nome;
 } TipoItemPilha;
 
 typedef struct TipoNoPilha *TipoApontadorPilha;
@@ -25,7 +25,7 @@ typedef struct {
 
 void CriaPilha(TipoPilha *P);
 int InserePilha(TipoPilha *P, TipoItemPilha I);
-TipoItemPilha RemovePilha(TipoPilha *P);
+void RemovePilha(TipoPilha *P);
 TipoItemPilha UltimoPilha(TipoPilha *P);
 TipoItemPilha TopoPilha(TipoPilha *P);
 

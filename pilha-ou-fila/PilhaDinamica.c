@@ -30,25 +30,23 @@ int InserePilha(TipoPilha *P, TipoItemPilha I) {
 }
 
 
-TipoItemPilha RemovePilha(TipoPilha *P) {
-	TipoItemPilha itemEmpty;
+void RemovePilha(TipoPilha *P) {
 	if (PilhaVazia(P)) {
 		printf("Deu nao\n");
-		return itemEmpty;
+		return;
 	}
 
 	// unico elemento
 	if (P->primeiro->prox == NULL) {
 		free(P->primeiro);
 		CriaPilha(P);
-		return itemEmpty;
+		return;
 	}
 
 	// remove do inicio
 	TipoApontadorPilha p = P->primeiro;
 	P->primeiro = P->primeiro->prox;
-
-	return p->item;
+	free(p);
 }
 
 TipoItemPilha TopoPilha(TipoPilha *P) {
@@ -73,9 +71,9 @@ void ImprimePilha(TipoPilha *L)  {
 	int i = 0;
 	while(P != NULL) {
 		if (P->prox != NULL)
-			printf("%d: chave=%d, Proximo=%d\n", i, P->item.chave, P->prox->item.chave);
+			printf("%d: chave=%d, nome=%c, Proximo=%d\n", i, P->item.chave, P->item.nome, P->prox->item.chave);
 		else
-			printf("%d: chave=%d, Proximo=NULO\n", i, P->item.chave);
+			printf("%d: chave=%d, nome=%c, Proximo=NULO\n", i, P->item.chave, P->item.nome);
 		P = P->prox;
 		i++;
 	}

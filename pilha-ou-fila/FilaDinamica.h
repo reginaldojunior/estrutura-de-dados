@@ -9,7 +9,7 @@
 typedef int TipoChave;
 typedef struct {
 	TipoChave chave;
-	//char nome[50];
+	char nome;
 } TipoItemFila;
 
 typedef struct TipoNoFila *TipoApontadorFila;
@@ -26,7 +26,7 @@ typedef struct {
 
 void CriaFila(TipoFila *F);
 int enfileira(TipoFila *F, TipoItemFila I);
-TipoItemFila desenfileira(TipoFila *F);
+void desenfileira(TipoFila *F);
 TipoItemFila frente(TipoFila *F);
 
 char FilaVazia(TipoFila *F);
