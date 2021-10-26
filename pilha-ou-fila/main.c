@@ -13,11 +13,6 @@ int main() {
 
 	scanf("%d", &N);
 
-    if (N < 1 || N > 100) {
-        printf("impossivel\n");
-        return 0;
-    }
-
     TipoPilha P;
     TipoFila F;
 
@@ -27,11 +22,6 @@ int main() {
 
 		scanf("%d", &K);
 
-        if (K < 2 || K > 100) {
-            printf("impossivel 1\n");
-            return 0;
-        }
-		
 		for (int j = 0; j < K; j++) { // indica os valores do caso de teste entre 2 a 100
 			scanf(" %c %d", &C, &I);
 
@@ -49,26 +39,24 @@ int main() {
                 TipoItemFila filaRemovido = frente(&F);
                 desenfileira(&F);
                 
-                if (pilhaRemovido.chave == I) {
+                if (pilhaRemovido.chave == I && itemNotFoundStack != 1) {
                     isStack++;
                 } 
                 
-                if (filaRemovido.chave == I) {
+                if (filaRemovido.chave == I && itemNotFoundQueue != 1) {
                     isQueue++;
-                }
-
-                if (isStack >= 1 && pilhaRemovido.chave != I) { // invalida pilha
-                    itemNotFoundStack = 1;
-                }
-
-                if (isQueue >= 1 && filaRemovido.chave != I) { // invalida fila
-                    itemNotFoundQueue = 1;
-                } else if (isQueue >= 1 && filaRemovido.chave != I) { // invalida fila
-                    isQueue = 0;
                 }
 
                 if (filaRemovido.chave == I && pilhaRemovido.chave == I) {
                     isNotDefinedMoreOneTime++;
+                }
+
+                if (pilhaRemovido.chave != I) { // invalida pilha
+                    itemNotFoundStack = 1;
+                }
+
+                if (filaRemovido.chave != I) { // invalida fila
+                    itemNotFoundQueue = 1;
                 }
             }
 		}
@@ -76,23 +64,22 @@ int main() {
         // printf("isStack %d isQueue %d itemNotFoundQueue %d itemNotFoundStack %d isNotDefinedMoreOneTime %d\n", isStack, isQueue, itemNotFoundQueue, itemNotFoundStack, isNotDefinedMoreOneTime);
         if (isStack > isQueue) {
             if (itemNotFoundStack == 1) {
-                printf("impossivel");   
+                printf("impossivel\n");   
             } else {
-                printf("pilha");
+                printf("pilha\n");
             }
         } else if (isQueue > isStack) {
             if (itemNotFoundQueue == 1) {
-                printf("impossivel");   
+                printf("impossivel\n");   
             } else {
-                printf("fila");
+                printf("fila\n");
             }
         } else if (isQueue == isStack && (itemNotFoundQueue > 0 || itemNotFoundStack > 0)) {
-            printf("impossivel"); 
+            printf("impossivel\n"); 
         } else {
-            printf("indefinido");
+            printf("indefinido\n");
         }
 
-        printf("\n");
         isQueue = 0;
         isStack = 0;
         itemNotFoundStack = 0;
