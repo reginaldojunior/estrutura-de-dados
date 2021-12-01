@@ -89,6 +89,7 @@ int Insere(TipoLista *L, TipoItem I)
     return SEM_ERRO;
 }
 
+
 int RemovePosicao(TipoLista *L, TipoApontador P)
 {
     if (P == NULL) {
@@ -99,19 +100,22 @@ int RemovePosicao(TipoLista *L, TipoApontador P)
     // remove do inicio
     if (P == L->primeiro) {
         L->primeiro = L->primeiro->prox;
-        L->primeiro->ant = NULL; 
         free(P);
 
         return SEM_ERRO;
     }
+    
+    // remove do meio
+    TipoApontador aux = L->primeiro;
+    while (aux->prox != NULL && aux->prox != P) {
+        aux = aux->prox;
+    }
 
-    P->ant->prox = P->prox;
+    aux->prox = P->prox;
 
     // remove do fim
-    if (P == L->ultimo) {
-        L->ultimo = P->ant;
-    } else {
-        P->prox->ant = P->ant;
+    if (aux->prox == NULL) {
+        L->ultimo = aux;
     }
 
     free(P);
@@ -178,8 +182,8 @@ char ListaCheia(TipoLista *L);
 // }
 
 char *generate_string_memory(size_t length, char *nome) {
-    char *string = NULL;
-
+    char *string;
+    // free(string);
     if (length) {
         string = malloc(sizeof(char) * (length + 1));
         int n;
@@ -197,44 +201,54 @@ char *generate_string_memory(size_t length, char *nome) {
 
 int main() {
     TipoLista Lista;
-    TipoItem Contato;
     TipoApontador Apontador;
     
     CriaLista(&Lista);
 
-	char acao[2], nome[10];
+	char acao, nome[10];
     int telefone;
+    char *nome_temp;
 
-    acao[2] = '1';
-        
-    // struct timeval  tv1, tv2;
-    // gettimeofday(&tv1, NULL);
+    int i = 0;
     
-    while (strcmp(acao, "0") != 0) {
-        scanf("%c", acao);
+    while (i != -1) {
+        fflush(stdout);
+        i++;
+            
+        scanf("%c ", &acao);
 
-        if (strcmp(acao, "A") == 0) {
-            scanf("%s %d", nome, &telefone);
-            Apontador = Pesquisa(&Lista, nome);
-     
+        if (acao == '0' || i > 4002) {     
+            i = -1;
+            break;
+        } else if (acao == 'R') {     
+            scanf("%s ", nome);
+        } else {
+            scanf("%s %d ", nome, &telefone);
+        }
+        
+        nome_temp = generate_string_memory(10, nome);
+        // printf("%i: acao: %c, nome: %s, telefone: %d\n", i, acao, nome_temp, telefone);
+        // printf("%i: acao: %c\n", i, acao);
+
+        Apontador = Pesquisa(&Lista, nome_temp);
+        
+        TipoItem Contato;
+        Contato.chave = nome_temp;
+        Contato.telefone = telefone;
+
+        if (acao == 'A') {     
             if (Apontador == NULL) {
                 printf("Operacao invalida: contatinho nao encontrado\n");
                 continue;
             }
             
             RemovePosicao(&Lista, Apontador);
-
-            Contato.chave = generate_string_memory(10, nome);
-            Contato.telefone = telefone;
             Insere(&Lista, Contato);
 
             continue;
         } 
 
-        if (strcmp(acao, "P") == 0) {
-            scanf("%s", nome);
-            Apontador = Pesquisa(&Lista, nome);
-
+        if (acao == 'P') {
             if (Apontador != NULL) {
                 printf("Contatinho encontrado: telefone %d\n", Apontador->Item.telefone);
                 continue;
@@ -244,25 +258,17 @@ int main() {
             continue;
         }
 
-        if (strcmp(acao, "I") == 0) {
-            scanf("%s %d", nome, &telefone);
-            Apontador = Pesquisa(&Lista, nome);
-
+        if (acao == 'I') {
             if (Apontador != NULL) {
                 printf("Contatinho ja inserido\n");
                 continue;
             }
 
-            Contato.chave = generate_string_memory(10, nome);
-            Contato.telefone = telefone;
             Insere(&Lista, Contato);
             continue;
         }
 
-        if (strcmp(acao, "R") == 0) {
-            scanf("%s", nome);
-            Apontador = Pesquisa(&Lista, nome);
-
+        if (acao == 'R') {
             if (Apontador == NULL) {
                 printf("Operacao invalida: contatinho nao encontrado\n");
                 continue;
