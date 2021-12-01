@@ -2,6 +2,7 @@
     "files.associations": {
         "limits": "c",
         "listaestatica.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "string_view": "c"
     }
 }

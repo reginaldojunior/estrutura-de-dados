@@ -38,11 +38,11 @@ int main() {
                 RemovePilha(&P);
                 TipoItemFila filaRemovido = frente(&F);
                 desenfileira(&F);
-                
+
                 if (pilhaRemovido.chave == I && itemNotFoundStack != 1) {
                     isStack++;
                 } 
-                
+
                 if (filaRemovido.chave == I && itemNotFoundQueue != 1) {
                     isQueue++;
                 }
@@ -60,7 +60,7 @@ int main() {
                 }
             }
 		}
-        
+
         // printf("isStack %d isQueue %d itemNotFoundQueue %d itemNotFoundStack %d isNotDefinedMoreOneTime %d\n", isStack, isQueue, itemNotFoundQueue, itemNotFoundStack, isNotDefinedMoreOneTime);
         if (isStack > isQueue) {
             if (itemNotFoundStack == 1) {
