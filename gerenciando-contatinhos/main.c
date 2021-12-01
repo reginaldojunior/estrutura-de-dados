@@ -89,6 +89,43 @@ int Insere(TipoLista *L, TipoItem I)
     return SEM_ERRO;
 }
 
+int SubstituiItemPorChave(TipoLista *L, TipoChave C, TipoItem I)
+{
+    if (ListaVazia(L)) {
+        return NAO_ENCONTROU;
+    }
+
+    TipoApontador p;
+    int encontrou = 0;
+    p = Pesquisa(L, C);
+
+    if (p != NULL) {
+        TipoItem old = p->Item;
+        p->Item = I;
+        Insere(L, old);
+        encontrou = 1;
+    }
+
+    if (encontrou == 0) {
+        return POSICAO_INVALIDA;
+    }
+
+    p = L->primeiro;
+    while (p != NULL) {
+        if (p->prox != NULL) {
+            if (strcmp(p->Item.chave, p->prox->Item.chave) > 0) {
+                printf("eu chego aqui?\n");
+                TipoItem aux = p->Item;
+                p->Item = p->prox->Item;
+                p->prox->Item = aux;
+            }
+        }
+
+        p = p->prox;
+    }
+
+    return SEM_ERRO;
+}
 
 int RemovePosicao(TipoLista *L, TipoApontador P)
 {
@@ -217,10 +254,10 @@ int main() {
             
         scanf("%c ", &acao);
 
-        if (acao == '0' || i > 4002) {     
+        if (acao == '0') {
             i = -1;
             break;
-        } else if (acao == 'R') {     
+        } else if (acao == 'R' || acao == 'P') {
             scanf("%s ", nome);
         } else {
             scanf("%s %d ", nome, &telefone);
@@ -229,19 +266,19 @@ int main() {
         nome_temp = generate_string_memory(10, nome);
         // printf("%i: acao: %c, nome: %s, telefone: %d\n", i, acao, nome_temp, telefone);
         // printf("%i: acao: %c\n", i, acao);
-
-        Apontador = Pesquisa(&Lista, nome_temp);
         
         TipoItem Contato;
         Contato.chave = nome_temp;
         Contato.telefone = telefone;
+
+        Apontador = Pesquisa(&Lista, nome_temp);
 
         if (acao == 'A') {     
             if (Apontador == NULL) {
                 printf("Operacao invalida: contatinho nao encontrado\n");
                 continue;
             }
-            
+
             RemovePosicao(&Lista, Apontador);
             Insere(&Lista, Contato);
 
