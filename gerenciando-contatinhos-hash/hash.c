@@ -1,46 +1,95 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-#define SIZE 10000
+#define SIZE 10000000
 
-struct dados {
-  int telefone;
-  int chave;
+struct Contatos {
+   int telefone;   
+   int key;
 };
 
-typedef struct dados* dado;
+struct Contatos* hash_table[SIZE];
+struct Contatos* Contato;
+struct Contatos* item;
 
-int stringParaInt(char *string) {
-    int tamanho, primeira, segunda;
-
-    tamanho =  strlen(string);
-    primeira = string[0];
-    segunda = string[1];
-
-    int resultado = (tamanho * primeira) + segunda;
-
-    return resultado;
+int stringParaInt(char *str){
+    int i, valor = 7;
+    int tam = strlen(str);
+    for(i=0; i < tam; i++)
+        valor = 31 * valor + (int) str[i];
+    return (valor & 0x7FFFFFFF);
 }
 
-int hash(int valor) {
-    return valor % SIZE;  
+int hashCode(int key) {
+   return key % SIZE;
 }
 
-// dado *Pesquisa(dado tabela, int chave) {
-//     return tabela[chave];
-// }
+struct Contatos *search(int key) {
+    int chave_array = hashCode(key);  
+
+    while(hash_table[chave_array] != NULL) {	
+        if(hash_table[chave_array]->key == key)
+            return hash_table[chave_array]; 
+
+        ++chave_array;
+
+        chave_array %= SIZE;
+    }        
+	
+    return NULL;        
+}
+
+void insert(int key, int telefone) {
+   struct Contatos *item = (struct Contatos*) malloc(sizeof(struct Contatos));
+   item->telefone = telefone;  
+   item->key = key;
+
+   int chave_array = hashCode(key);
+
+    while(hash_table[chave_array] != NULL && hash_table[chave_array]->key != -1) {
+        ++chave_array;
+        chave_array %= SIZE;
+    }
+	
+    hash_table[chave_array] = item;
+}
+
+struct Contatos* delete(struct Contatos* item) {
+   int key = item->key;
+
+   int chave_array = hashCode(key);
+
+   while(hash_table[chave_array] != NULL) {
+	
+      if(hash_table[chave_array]->key == key) {
+         struct Contatos* temp = hash_table[chave_array]; 
+
+         hash_table[chave_array] = Contato; 
+         return temp;
+      }
+
+      ++chave_array;
+
+      chave_array %= SIZE;
+   }      
+	
+   return NULL;        
+}
 
 int main() {
-    char acao, nome[10];
-    int telefone;
-
-    dado tabelaContatos[SIZE];
-    dado Apontador;
+    Contato = (struct Contatos*) malloc(sizeof(struct Contatos));
+    Contato->telefone = -1;  
+    Contato->key = -1; 
 
     int i = 0;
+    char acao, nome[10];
+    int telefone;
     
     while (i != -1) {
+        telefone = -1;
+
         fflush(stdout);
         i++;
             
@@ -54,32 +103,29 @@ int main() {
         } else {
             scanf("%s %d ", nome, &telefone);
         }
-        
-        int hash_code = hash(stringParaInt(nome));
-        // printf("%i: acao: %c, nome: %s, telefone: %d\n", i, acao, nome_temp, telefone);
-        // printf("%i: acao: %c\n", i, acao);
-        
-        struct dados *item = (struct dados*) malloc(sizeof(struct dados));
-        item->chave = hash_code;
-        item->telefone = telefone;
 
-        Apontador = tabelaContatos[hash_code];
+        int chave_alfabeto = nome[0];
+        int key = stringParaInt(nome);
+        item = search(key);
 
-        if (acao == 'A') {     
-            if (Apontador == NULL) {
+        if (acao == 'A') {
+            if(item == NULL) {
                 printf("Operacao invalida: contatinho nao encontrado\n");
                 continue;
             }
-
-            tabelaContatos[hash_code] = item;
+            
+            delete(item);
+            insert(key, telefone);
 
             continue;
         }
 
         if (acao == 'P') {
-            if (Apontador != NULL) {
-                printf("Contatinho encontrado: telefone %d\n", Apontador->telefone);
-                continue;
+            if (item != NULL) {
+                if (item->telefone != -1) {
+                    printf("Contatinho encontrado: telefone %d\n", item->telefone);
+                    continue;
+                }
             }
 
             printf("Contatinho nao encontrado\n");
@@ -87,25 +133,23 @@ int main() {
         }
 
         if (acao == 'I') {
-            if (Apontador != NULL) {
+            if (item != NULL) {
                 printf("Contatinho ja inserido\n");
                 continue;
             }
 
-            tabelaContatos[hash_code] = item;
+            insert(key, telefone);
             continue;
         }
 
         if (acao == 'R') {
-            if (Apontador == NULL) {
+            if (item == NULL) {
                 printf("Operacao invalida: contatinho nao encontrado\n");
                 continue;
             }
 
-            free(tabelaContatos[hash_code]);
+            delete(item);
             continue;
         }
     }
-
-    return 0;
 }
