@@ -20,14 +20,6 @@ TipoNo* CriaNo(TipoItem I, TipoNo *E, TipoNo *D)
     return N;
 }
 
-// void InsereParaEsquerda(TipoNo *raiz, TipoItem I, TipoNo *E)
-// {
-//     TipoNo* p = (TipoNo*) malloc(sizeof(TipoNo));
-
-//     E->Item = I;
-//     raiz->esquerdo = E;
-// }
-
 int Insere(TipoNo *A, TipoItem I)
 {
     if (A->esquerdo == NULL) {
@@ -48,7 +40,21 @@ int Insere(TipoNo *A, TipoItem I)
 
     return 0;
 }
-
+ 
+TipoNo* Pesquisa(TipoNo* N, TipoChave C)
+{
+    printf("n.item %d chave %d \n", N->Item.chave, C);
+    if (N == NULL) {
+        return NULL;
+    } else if (N->Item.chave > C) {
+        return Pesquisa(N->esquerdo, C);
+    } else if (N->Item.chave < C) {
+        return Pesquisa(N->direito, C);
+    } else {
+        return N;
+    }
+}
+ 
 
 void ImprimeArvore(TipoNo *raiz)
 {

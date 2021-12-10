@@ -27,7 +27,7 @@ int Insere(TipoNo *A, TipoItem I);
 int SubstituiItemPorChave(TipoArvore *A, TipoChave C, TipoItem I);
 int Remove(TipoArvore *A, TipoChave C);
 int RemovePosicao(TipoArvore *A, TipoApontador P);
-TipoApontador Pesquisa(TipoArvore *A, TipoChave C);
+TipoNo* Pesquisa(TipoNo* N, TipoChave C);
 
 char ArvoreVazia(TipoArvore *A);
 char ArvoreCheia(TipoArvore *A);

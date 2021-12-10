@@ -32,5 +32,8 @@ int main() {
 
     ImprimeArvore(&A);
 
+    TipoNo* No = Pesquisa(&A, 16);
+    printf("encontrou: %d\n", No->Item.chave);
+
     return 0;
 }
