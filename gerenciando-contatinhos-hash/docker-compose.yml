@@ -5,3 +5,4 @@ services:
     build: .
     volumes:
       - .:/usr/src/myapp
+    mem_limit: 6mb

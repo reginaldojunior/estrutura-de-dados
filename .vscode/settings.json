@@ -3,6 +3,7 @@
         "limits": "c",
         "listaestatica.h": "c",
         "typeinfo": "c",
-        "string_view": "c"
+        "string_view": "c",
+        "arvorebinaria.h": "c"
     }
 }
